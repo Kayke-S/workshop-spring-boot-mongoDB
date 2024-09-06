@@ -1,5 +1,6 @@
 package com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.resources;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.domain.User;
+import com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.dto.UserDTO;
 import com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.services.UserService;
 
 @RestController
@@ -19,9 +21,15 @@ public class UserResources {
 	private UserService service;
 
 	@GetMapping
-	public ResponseEntity<List<User>> findAll(){
+	public ResponseEntity<List<UserDTO>> findAll(){
 		
 		List<User> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+		List<UserDTO> listDTO = new ArrayList<>();
+		
+		for(User obj: list) {
+		    UserDTO instantiationDto = new UserDTO(obj);
+		    listDTO.add(instantiationDto);
+		}
+		return ResponseEntity.ok().body(listDTO);
 	}
 }
