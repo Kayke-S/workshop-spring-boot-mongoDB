@@ -16,21 +16,26 @@ public class UserService {
 
 	@Autowired
 	private UserRepository repository;
-	
-	public List<User> findAll(){
+
+	public List<User> findAll() {
 		return repository.findAll();
 	}
-	
+
 	public User findById(String id) {
 		Optional<User> user = repository.findById(id);
 		return user.orElseThrow(() -> new ObjectNotFoundException("Objeto nao encontrado"));
 	}
-	
+
 	public User insert(User user) {
 		return repository.insert(user);
 	}
-	
-	public User fromDTO (UserDTO objDTO) {
+
+	public void delete(String id) {
+        findById(id);
+		repository.deleteById(id);
+	}
+
+	public User fromDTO(UserDTO objDTO) {
 		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
 	}
 }
