@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.dto.authorDTO;
 
-@Document
+@Document(collection = "Post")
 public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

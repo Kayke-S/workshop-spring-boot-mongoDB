@@ -1,0 +1,22 @@
+package com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.services;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.domain.Post;
+import com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.exception.ObjectNotFoundException;
+import com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.repository.PostRepository;
+
+@Service
+public class PostService {
+
+	@Autowired
+	private PostRepository repository;
+	
+	public Post findById(String id) {
+		Optional<Post> post = repository.findById(id);
+		return post.orElseThrow(() -> new ObjectNotFoundException("Objeto nao encontrado"));
+	}
+}
