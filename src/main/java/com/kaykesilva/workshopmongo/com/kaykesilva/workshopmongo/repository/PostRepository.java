@@ -1,12 +1,20 @@
 package com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.domain.Post;
-import com.kaykesilva.workshopmongo.com.kaykesilva.workshopmongo.domain.User;
 
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {
 
+	List<Post> findByTitleContainingIgnoreCase(String text);
+	//query method
+	//Sao metodos predefinidos que basta chamar pelo nome que o spring.data 
+	// faz o resto
+	
+	//ignoreCase eh uma 'assinatura' que ignora pesquisas maiusculas ou minusculas na url
+	
 }
